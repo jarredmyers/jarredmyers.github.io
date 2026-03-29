@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jarred Myers — Strategy · AI · Impact</title>
+<meta name="description" content="Jarred Myers helps organizations design systems for clearer thinking, better decisions, and faster action. Strategy consultant specializing in AI and impact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F2EC;
+    --ink: #1A1814;
+    --ink-mid: #4A4740;
+    --ink-light: #8A8780;
+    --accent: #2D5A3D;
+    --accent-light: #4A7A5A;
+    --rule: rgba(26,24,20,0.12);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(245,242,236,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--rule);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 7rem 3rem 4rem;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-left { padding-right: 2rem; }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 0.5px;
+    background: var(--accent);
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .hero-body {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--ink);
+    padding-bottom: 0.25rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .hero-cta:hover { color: var(--accent); border-color: var(--accent); }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+  }
+
+  .stat-card {
+    background: rgba(26,24,20,0.04);
+    padding: 2rem 1.75rem;
+    transition: background 0.2s;
+  }
+  .stat-card:hover { background: rgba(26,24,20,0.07); }
+
+  .stat-num {
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 0.5px solid var(--rule);
+    margin: 0;
+  }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 4rem;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    padding-top: 0.4rem;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title em { font-style: italic; }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+  }
+
+  .work-card {
+    background: var(--cream);
+    padding: 2.5rem 2rem;
+    transition: background 0.2s;
+  }
+  .work-card:hover { background: rgba(45,90,61,0.04); }
+
+  .work-card-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--ink-light);
+    margin-bottom: 1.25rem;
+  }
+
+  .work-card-title {
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-bottom: 0.85rem;
+    line-height: 1.25;
+  }
+
+  .work-card-title em { font-style: italic; font-weight: 300; }
+
+  .work-card-body {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+
+  .background-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    margin-bottom: 1px;
+  }
+
+  .bg-entry {
+    background: var(--cream);
+    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .bg-year {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--ink-light);
+    padding-top: 0.3rem;
+    white-space: nowrap;
+  }
+
+  .bg-org {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+
+  .bg-role {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--ink-light);
+    text-transform: uppercase;
+  }
+
+  .geo-strip {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: flex;
+    gap: 1px;
+    background: var(--rule);
+  }
+
+  .geo-item {
+    background: var(--cream);
+    padding: 1.25rem 2rem;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    flex: 1;
+    text-align: center;
+  }
+
+  .approach-section {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .approach-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .approach-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.4);
+    margin-bottom: 1.5rem;
+  }
+
+  .approach-quote {
+    font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--cream);
+  }
+
+  .approach-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .approach-point {
+    padding-top: 2rem;
+    border-top: 0.5px solid rgba(245,242,236,0.15);
+  }
+
+  .approach-point-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .approach-point-text {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(245,242,236,0.75);
+    line-height: 1.7;
+  }
+
+  .writing-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .writing-left .section-label { margin-bottom: 1rem; }
+
+  .writing-left p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .writing-placeholder {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .writing-item {
+    background: rgba(26,24,20,0.03);
+    padding: 1.75rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0.5;
+  }
+
+  .writing-item-title {
+    font-size: 1.05rem;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .writing-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    white-space: nowrap;
+    border: 0.5px solid var(--rule);
+    padding: 0.3rem 0.7rem;
+  }
+
+  .contact-section {
+    background: var(--accent);
+    color: var(--cream);
+  }
+
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .contact-title {
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .contact-title em { font-style: italic; }
+
+  .contact-right p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(245,242,236,0.8);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    border-bottom: 0.5px solid rgba(245,242,236,0.5);
+    padding-bottom: 0.25rem;
+    margin-right: 2.5rem;
+    transition: border-color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--cream); }
+
+  .footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid var(--rule);
+  }
+
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--ink-light);
+  }
+
+  @media (max-width: 768px) {
+    .nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 3rem; }
+    .hero-right { display: none; }
+    .section { padding: 4rem 1.5rem; }
+    .section-header { grid-template-columns: 1fr; gap: 1rem; }
+    .work-grid { grid-template-columns: 1fr; }
+    .background-grid { grid-template-columns: 1fr; }
+    .approach-inner { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+    .writing-section { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 1.5rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+    .geo-strip { padding: 0 1.5rem; flex-wrap: wrap; }
+    .footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">Jarred Myers</div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Strategy · AI · Impact</div>
+    <h1 class="hero-title">
+      Turning <em>complexity</em><br>into decisions<br>that move.
+    </h1>
+    <p class="hero-body">
+      I help organizations—foundations, mission-driven institutions, and leadership teams—design systems for clearer thinking, better decisions, and faster action. Often with AI at the centre.
+    </p>
+    <a href="#contact" class="hero-cta">Get in touch →</a>
+  </div>
+  <div class="hero-right">
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years in field</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Continents</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-num" style="font-style: italic; font-size: 2rem; padding-top: 0.25rem;">Cross-</div>
+        <div class="stat-label">sector reach</div>
+      </div>
+      <div class="stat-card" style="background: var(--accent); color: var(--cream);">
+        <div class="stat-num" style="font-size: 1.6rem; font-style: italic; padding-top: 0.15rem;">AI × Strategy</div>
+        <div class="stat-label" style="color: rgba(245,242,236,0.6);">Core focus</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="work">
+  <div class="section-header">
+    <div class="section-label">What I do</div>
+    <h2 class="section-title">Where I<br>add <em>most value</em></h2>
+  </div>
+  <div class="work-grid">
+    <div class="work-card">
+      <div class="work-card-num">01</div>
+      <h3 class="work-card-title"><em>AI</em> decision systems</h3>
+      <p class="work-card-body">Designing pragmatic AI tools that improve how leaders make decisions—not automating for automation's sake, but reducing friction where it costs the most.</p>
+    </div>
+    <div class="work-card">
+      <div class="work-card-num">02</div>
+      <h3 class="work-card-title">Strategic <em>clarity</em></h3>
+      <p class="work-card-body">Helping teams translate ambitious goals into executable strategies—especially under constraints of time, data, and organizational capacity.</p>
+    </div>
+    <div class="work-card">
+      <div class="work-card-num">03</div>
+      <h3 class="work-card-title"><em>Impact</em> architecture</h3>
+      <p class="work-card-body">Structuring grantmaking, impact investing, and blended finance portfolios for foundations and institutions—from landscape analysis through to measurement.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="section" id="background">
+  <div class="section-header">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">Built across<br><em>sectors</em> and borders</h2>
+  </div>
+  <div class="background-grid">
+    <div class="bg-entry">
+      <div class="bg-year">2022–now</div>
+      <div>
+        <div class="bg-org">Boldly Go Philanthropy</div>
+        <div class="bg-role">Consultant · Strategic Philanthropy</div>
+      </div>
+    </div>
+    <div class="bg-entry">
+      <div class="bg-year">2018–now</div>
+      <div>
+        <div class="bg-org">Independent Consultant</div>
+        <div class="bg-role">Management Consulting · Global Development</div>
+      </div>
+    </div>
+    <div class="bg-entry">
+      <div class="bg-year">2018–2024</div>
+      <div>
+        <div class="bg-org">Arc Impact</div>
+        <div class="bg-role">Founding Member · Investment Committee</div>
+      </div>
+    </div>
+    <div class="bg-entry">
+      <div class="bg-year">2019–2020</div>
+      <div>
+        <div class="bg-org">Social Finance Israel</div>
+        <div class="bg-role">Innovative Finance Specialist</div>
+      </div>
+    </div>
+    <div class="bg-entry">
+      <div class="bg-year">2014–2018</div>
+      <div>
+        <div class="bg-org">Michael & Susan Dell Foundation</div>
+        <div class="bg-role">Program Officer · Innovation Portfolio</div>
+      </div>
+    </div>
+    <div class="bg-entry">
+      <div class="bg-year">2010–2011</div>
+      <div>
+        <div class="bg-org">Duke University, Fuqua</div>
+        <div class="bg-role">MBA · Business Administration</div>
+      </div>
+    </div>
+  </div>
+  <div class="geo-strip">
+    <div class="geo-item">Israel</div>
+    <div class="geo-item">South Africa</div>
+    <div class="geo-item">Sub-Saharan Africa</div>
+    <div class="geo-item">India</div>
+    <div class="geo-item">United States</div>
+  </div>
+</section>
+
+<section class="approach-section">
+  <div class="approach-inner">
+    <div>
+      <div class="approach-label">How I work</div>
+      <blockquote class="approach-quote">"Good strategy is just good thinking, made legible."</blockquote>
+    </div>
+    <ul class="approach-points">
+      <li class="approach-point">
+        <div class="approach-point-label">Pragmatic AI</div>
+        <div class="approach-point-text">AI is a means, not a mandate. I focus on where it genuinely improves decision speed and quality—and where the hype breaks down.</div>
+      </li>
+      <li class="approach-point">
+        <div class="approach-point-label">Field-tested</div>
+        <div class="approach-point-text">Experience across government, foundations, startups, and nonprofits means solutions that work under real constraints—not just in slide decks.</div>
+      </li>
+      <li class="approach-point">
+        <div class="approach-point-label">Ideas-first</div>
+        <div class="approach-point-text">I share frameworks and field notes openly. If you've read something useful here, a conversation is always worth having.</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="writing-section" id="writing">
+  <div class="writing-left">
+    <div class="section-label">Writing</div>
+    <p>Field notes on AI, philanthropy, and operating models—what works, what doesn't, and where the received wisdom needs questioning.</p>
+    <p style="opacity: 0.5; font-size: 0.9rem; font-style: italic;">Coming soon.</p>
+  </div>
+  <div class="writing-placeholder">
+    <div class="writing-item">
+      <div class="writing-item-title">On AI and the limits of automation in high-stakes decisions</div>
+      <div class="writing-badge">Coming soon</div>
+    </div>
+    <div class="writing-item">
+      <div class="writing-item-title">What foundations get wrong about strategy</div>
+      <div class="writing-badge">Coming soon</div>
+    </div>
+    <div class="writing-item">
+      <div class="writing-item-title">Results-based finance: a field guide</div>
+      <div class="writing-badge">Coming soon</div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title">
+      Let's<br><em>compare<br>notes.</em>
+    </h2>
+    <div class="contact-right">
+      <p>If you're working on something complex—and wondering where AI, strategy, or better decision systems could help—I'm happy to have a conversation.</p>
+      <a href="mailto:jarredmyers@gmail.com" class="contact-link">Email →</a>
+      <a href="https://www.linkedin.com/in/jarredmyers" class="contact-link">LinkedIn →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-copy">© 2026 Jarred Myers</div>
+  <div class="footer-copy">Israel · Available globally</div>
+</footer>
+
+</body>
+</html>
